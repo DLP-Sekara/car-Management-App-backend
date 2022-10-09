@@ -8,6 +8,7 @@ connection.connect(function (err) {
     if(err){
         console.log(err)
     }else{
+        
         console.log("connected to the mysql server")
         var userTable="CREATE TABLE IF NOT EXISTS user (id varchar(255) PRIMARY KEY,name varchar(255),address varchar(255),contact varchar(255) )"
         connection.query(userTable,function (err, result) {
