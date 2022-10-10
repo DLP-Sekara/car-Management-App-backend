@@ -6,10 +6,10 @@ const mysql = require('mysql')
 const connection = mysql.createConnection(db.database);
 connection.connect(function (err) {
     if(err){
-        console.log(err)
+        console.log(err.message)
     }else{
         console.log("connected to the mysql server")
-        var userTable="CREATE TABLE IF NOT EXISTS car (carNo varchar(255) PRIMARY KEY,brad varchar(255),model varchar(255),color varchar(255),price double )"
+        var userTable="CREATE TABLE IF NOT EXISTS car (carNo varchar(255) PRIMARY KEY,brand varchar(255),model varchar(255),color varchar(255),price double )"
         connection.query(userTable,function (err, result) {
             if(err) throw err;
             if(result.warningCount===0){
@@ -37,10 +37,10 @@ router.post('/',(req,res)=>{
     const color=req.body.color;
     const price=req.body.price;
 
-    var query="INSERT INTO car (carNo,brand,model,color,price) VALUES (?,?,?,?)";
+    var query="INSERT INTO car (carNo,brand,model,color,price) VALUES (?,?,?,?,?)";
     connection.query(query,[carNo,brand,model,color,price],(err)=>{
         if(err){
-            res.send({"message":"car entity"})
+            res.send({"message":"Error"})
             //throw err;
         }else{
             res.send({"message":"car added"})

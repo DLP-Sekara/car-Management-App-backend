@@ -6,7 +6,7 @@ const mysql = require('mysql')
 const connection = mysql.createConnection(db.database);
 connection.connect(function (err) {
     if(err){
-        console.log(err)
+        console.log(err.message)
     }else{
         
         console.log("connected to the mysql server")
@@ -40,7 +40,7 @@ router.post('/',(req,res)=>{
     var query="INSERT INTO user (id,name,address,contact) VALUES (?,?,?,?)";
     connection.query(query,[id,name,address,contact],(err)=>{
         if(err){
-            res.send({"message":"user entity"})
+            res.send({"message":"Error"})
             //throw err;
         }else{
             res.send({"message":"user added"})
